@@ -7,11 +7,6 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   };
   $scope.resultOculi = '';
   $scope.craftMsg = '';
-  $scope.progressBarAmount = 0;
-  $scope.progressBarStyle = {
-    style: "width: 60%;",
-    amount: 0
-  }
 
   $scope.selectOculi = function(stoneClass){
     //choose the next oculi
@@ -36,6 +31,7 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     var r = Recipes.getResult(Object.values($scope.chosenOculi));
     if (r){
       $scope.craftMsg = "Crafted " + r + "!!!";
+      $scope.resultOculi = r;
       var resultElement = angular.element( document.querySelector( '#result') );
       resultElement.removeAttr('class').addClass('oculi').addClass(r);
     } else {
@@ -49,7 +45,7 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
       'oculi-two': '',
       'oculi-three': '',
     };
-    $scope.resultOculi = '';
+    $scope.resultOculi = null;
     $scope.craftMsg = '';
   }
 

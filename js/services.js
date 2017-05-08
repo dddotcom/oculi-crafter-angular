@@ -23,8 +23,7 @@ angular.module('OculiCrafterServices', [])
           }
         }
         else if (chosenOculiValues.length === 2){
-          console.log("crafting with two!");
-          if(recipes[key].includes(chosenOculiValues[0]) && recipes[key].includes(chosenOculiValues[1])){
+          if(recipes[key].length === 2 && recipes[key].includes(chosenOculiValues[0]) && recipes[key].includes(chosenOculiValues[1])){
             return key;
           }
         }
