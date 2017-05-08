@@ -88,6 +88,22 @@ button:focus {
   background-color: #e7aaba;
 }
 
+.0 {
+  width: 2em;
+}
+
+.33 {
+  width: 33%;
+}
+
+.66 {
+  width: 66%;
+}
+
+.99 {
+  width: 100%;
+}
+
 #craft-button {
   margin-top: 79px;
 }
