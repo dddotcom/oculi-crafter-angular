@@ -51,5 +51,19 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
 
 }])
 .controller('InventoryCtrl', ['$scope', function($scope){
+  $scope.stash = {
+    'sapphire': 0,
+    'ruby': 0,
+    'emerald': 0,
+    'tourmaline': 0,
+    'amethyst': 0,
+    'citrine': 0,
+    'diamond': 0,
+    'onyx': 0,
+    'spinel': 0
+  }
 
+  $scope.addOculi = function(oculi){
+    $scope.stash[oculi]++;
+  }
 }]);

@@ -1,1 +1,85 @@
-<h1>My Inventory</h1>
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <h3 class="text-center">Bulk Add</h3>
+    <form class="form-horizontal">
+      <div class="form-group" ng-repeat="(stone, qty) in stash">
+        <label class="control-label col-sm-offset-4 col-sm-2">{{stone}}</label>
+        <div class="col-sm-2">
+          <input type="number" class="form-control" value=0>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="col-sm-offset-4 col-sm-4" ng-click="bulkAdd()">Add</button>
+      </div>
+
+    </form>
+
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h3 class="text-center">Oculi Stash</h3>
+    <div class="all-oculi">
+      <div class="row">
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.sapphire}}</span>
+          <button class="oculi sapphire" ng-click="addOculi('sapphire')">
+          </button>
+          <p>Sapphire</p>
+        </div>
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.ruby}}</span>
+          <button class="oculi ruby" ng-click="addOculi('ruby')">
+          </button>
+          <p>Ruby</p>
+        </div>
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.emerald}}</span>
+          <button class="oculi emerald" ng-click="addOculi('emerald')">
+          </button>
+          <p>Emerald</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.tourmaline}}</span>
+          <button class="oculi tourmaline" ng-click="addOculi('tourmaline')">
+          </button>
+          <p>Tourmaline</p>
+        </div>
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.amethyst}}</span>
+          <button class="oculi amethyst" ng-click="addOculi('amethyst')">
+          </button>
+          <p>Amethyst</p>
+        </div>
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.citrine}}</span>
+          <button class="oculi citrine" ng-click="addOculi('citrine')">
+          </button>
+          <p>Citrine</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.diamond}}</span>
+          <button class="oculi diamond" ng-click="addOculi('diamond')">
+          </button>
+          <p>Diamond</p>
+        </div>
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.onyx}}</span>
+          <button class="oculi onyx" ng-click="addOculi('onyx')">
+          </button>
+          <p>Onyx</p>
+        </div>
+        <div class="well col-xs-4">
+          <span class="badge">{{stash.spinel}}</span>
+          <button class="oculi spinel" ng-click="addOculi('spinel')">
+          </button>
+          <p>Spinel</p>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <h4 class="well text-center craft-msg" ng-show="craftMsg">{{craftMsg}}</h4>
+  </div>
+</div>
