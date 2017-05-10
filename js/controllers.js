@@ -63,7 +63,30 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     'spinel': 0
   }
 
+  $scope.stashForm = {
+    'sapphire': 0,
+    'ruby': 0,
+    'emerald': 0,
+    'tourmaline': 0,
+    'amethyst': 0,
+    'citrine': 0,
+    'diamond': 0,
+    'onyx': 0,
+    'spinel': 0
+  };
+
   $scope.addOculi = function(oculi){
     $scope.stash[oculi]++;
+  }
+
+  $scope.bulkAddOculi = function(){
+    for(stone in $scope.stashForm){
+      $scope.stash[stone] += $scope.stashForm[stone];
+    }
+  }
+
+  $scope.resetStash = function(){
+    Object.keys($scope.stash).forEach(v => $scope.stash[v] = 0);
+    Object.keys($scope.stashForm).forEach(v => $scope.stashForm[v] = 0);
   }
 }]);

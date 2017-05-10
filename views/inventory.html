@@ -5,11 +5,11 @@
       <div class="form-group" ng-repeat="(stone, qty) in stash">
         <label class="control-label col-sm-offset-4 col-sm-2">{{stone}}</label>
         <div class="col-sm-2">
-          <input type="number" class="form-control" value=0>
+          <input type="number" class="form-control" value={{stashForm[stone]}} ng-model="stashForm[stone]">
         </div>
       </div>
       <div class="text-center">
-        <button class="col-sm-offset-4 col-sm-4" ng-click="bulkAdd()">Add</button>
+        <button class="col-sm-offset-4 col-sm-4" ng-click="bulkAddOculi()">Add</button>
       </div>
 
     </form>
@@ -79,7 +79,12 @@
         </div>
       </div>
     </div>
-    <br><br>
-    <h4 class="well text-center craft-msg" ng-show="craftMsg">{{craftMsg}}</h4>
+    <div class="text-center">
+      <br>
+      <button ng-click="resetStash()">Reset Stash</button>
+    </div>
   </div>
+</div>
+<div class="text-center row">
+  <h3>But...what can I make?</h3>
 </div>
