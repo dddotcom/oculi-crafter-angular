@@ -1,5 +1,5 @@
 angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
-.controller('CraftCtrl', ['$scope', '$compile', 'Recipes', function($scope, $compile, Recipes){
+.controller('CraftCtrl', ['$scope', '$compile', 'Recipes', 'Stats', function($scope, $compile, Recipes, Stats){
   $scope.chosenOculi = {
     'oculi-one': '',
     'oculi-two': '',
@@ -7,6 +7,8 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   };
   $scope.resultOculi = '';
   $scope.craftMsg = '';
+  // $scope.stats = Stats.getStats();
+  $scope.statsService = Stats;
 
   $scope.selectOculi = function(stoneClass){
     //choose the next oculi
@@ -30,7 +32,7 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     $scope.craftMsg = '';
     var r = Recipes.getResult(Object.values($scope.chosenOculi));
     if (r){
-      $scope.craftMsg = "Crafted " + r + "!!!";
+      $scope.craftMsg = "You crafted " + r + "!" + "\r\n" + Stats.getStoneStats(r);
       $scope.resultOculi = r;
       var resultElement = angular.element( document.querySelector( '#result') );
       resultElement.removeAttr('class').addClass('oculi').addClass(r);

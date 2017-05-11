@@ -1,4 +1,4 @@
-var app = angular.module('OculiCrafterAngular', ['ui.router', 'OculiCrafterControllers'])
+var app = angular.module('OculiCrafterAngular', ['ui.router', 'ui.bootstrap', 'OculiCrafterControllers'])
 .config(["$stateProvider", "$urlRouterProvider", "$locationProvider", function($stateProvider, $urlRouterProvider, $locationProvider){
   $urlRouterProvider.otherwise('/');
 

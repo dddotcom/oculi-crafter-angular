@@ -197,4 +197,16 @@ angular.module('OculiCrafterServices', [])
       brilliant: '+35% Magic Damage'
     } }
   }
+
+  return {
+    getAllStats: function(){
+      return stats;
+    },
+    getStoneStats: function(stone){
+      var attack = stats[stone].attack.rough;
+      var defense = stats[stone].defense.rough;
+      var timeline = stats[stone].timeline.rough;
+      return "Attack: " + attack + "\r\nDefense: " + defense + "\n" + "Timeline: " + timeline;
+    }
+  }
 });
