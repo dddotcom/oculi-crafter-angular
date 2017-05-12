@@ -6,25 +6,24 @@
       <div class="row">
         <div class="col-xs-offset-4 col-xs-4">
           <div class="oculi-well">
-            <button id="oculi-one" class="oculi" ng-show="chosenOculi['oculi-one']"></button>
+            <button id="oculi-one" class="oculi" ng-click="removeOculi('oculi-one')" ng-show="chosenOculi['oculi-one']"></button>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-4">
           <div class="oculi-well">
-            <button id="oculi-two" class="oculi" ng-show="chosenOculi['oculi-two']"></button>
+            <button id="oculi-two" class="oculi" ng-click="removeOculi('oculi-two')" ng-show="chosenOculi['oculi-two']"></button>
           </div>
         </div>
         <div class="col-xs-4 text-center">
           <div id="craft-button">
-            <button ng-click="craft()">Craft</button>
             <button ng-click="reset()">Reset</button>
           </div>
         </div>
         <div class="col-xs-4">
           <div class="oculi-well">
-              <button id="oculi-three" class="oculi" ng-show="chosenOculi['oculi-three']"></button>
+              <button id="oculi-three" class="oculi" ng-click="removeOculi('oculi-three')" ng-show="chosenOculi['oculi-three']"></button>
           </div>
         </div>
       </div>

@@ -1,36 +1,35 @@
 angular.module('OculiCrafterServices', [])
 .factory('Recipes', function(){
   var recipes = {
-    'sapphire': [],
-    'ruby': [],
-    'emerald': [],
-    'tourmaline': ['sapphire', 'emerald'],
-    'amethyst': ['sapphire', 'ruby'],
-    'citrine': ['ruby', 'emerald'],
+    'tourmaline': ['sapphire', 'emerald', 'blank'],
+    'amethyst': ['sapphire', 'ruby', 'blank'],
+    'citrine': ['ruby', 'emerald', 'blank'],
     'diamond': ['sapphire', 'ruby', 'emerald'],
     'onyx': ['tourmaline', 'amethyst', 'citrine'],
-    'spinel': ['diamond', 'onyx'],
+    'spinel': ['diamond', 'onyx', 'blank'],
     'princess-stone': ['diamond', 'onyx', 'spinel']
-  }
+  };
 
   return {
     getResult: function(chosenOculiValues){
-      chosenOculiValues = chosenOculiValues.filter(function(n){ return n !== '' });
       for(var key in recipes){
-        if(chosenOculiValues.length === 3){
-          if(recipes[key].includes(chosenOculiValues[0]) && recipes[key].includes(chosenOculiValues[1]) && recipes[key].includes(chosenOculiValues[2])){
-            return key;
+        let temp = chosenOculiValues.map(function(oculi){
+          return oculi === '' ? 'blank' : oculi;
+        });
+        let arr = recipes[key].slice();
+        if(arr.includes(temp[0])){
+          var index = arr.indexOf(temp[0]);
+          arr.splice(index, 1);
+          if(arr.includes(temp[1])){
+            index = arr.indexOf(temp[1]);
+            arr.splice(index, 1);
+            if(arr.includes(temp[2])){
+              return key;
+            }
           }
-        }
-        else if (chosenOculiValues.length === 2){
-          if(recipes[key].length === 2 && recipes[key].includes(chosenOculiValues[0]) && recipes[key].includes(chosenOculiValues[1])){
-            return key;
-          }
-        }
-        else {
-          return '';
         }
       }
+      return '';
     }
   }
 })

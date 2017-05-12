@@ -10,6 +10,19 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   // $scope.stats = Stats.getStats();
   $scope.statsService = Stats;
 
+  //dynamic crafting
+  $scope.$watchCollection('chosenOculi', function(newVal, oldVal){
+    if(newVal !== oldVal){
+      console.log("crafting");
+      $scope.craft();
+    }
+  });
+
+  $scope.removeOculi = function(key){
+    $scope.chosenOculi[key] = '';
+    $scope.craft();
+  }
+
   $scope.selectOculi = function(stoneClass){
     //choose the next oculi
     var parent = $scope.findOpenSlot(stoneClass);
@@ -31,12 +44,14 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   $scope.craft = function(){
     $scope.craftMsg = '';
     var r = Recipes.getResult(Object.values($scope.chosenOculi));
+    console.log("crafted:", r);
     if (r){
       $scope.craftMsg = "You crafted " + r + "!" + "\r\n" + Stats.getStoneStats(r);
       $scope.resultOculi = r;
       var resultElement = angular.element( document.querySelector( '#result') );
       resultElement.removeAttr('class').addClass('oculi').addClass(r);
     } else {
+      $scope.resultOculi = null;
       $scope.craftMsg = "Couldn't craft anything :(";
     }
   }
