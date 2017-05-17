@@ -42,54 +42,10 @@
     <h3 class="text-center">Oculi Library</h3>
     <div class="all-oculi">
       <div class="row">
-        <div class="well col-xs-4">
-          <button class="oculi sapphire" ng-click="selectOculi('sapphire')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('sapphire')}}" >
+        <div class="well col-xs-4" ng-repeat="o in oculiArray">
+          <button class="oculi {{o}}" ng-click="selectOculi(o)" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats(o)}}" >
           </button>
-          <p>Sapphire</p>
-        </div>
-        <div class="well col-xs-4">
-          <button class="oculi ruby" ng-click="selectOculi('ruby')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('ruby')}}" >
-          </button>
-          <p>Ruby</p>
-        </div>
-        <div class="well col-xs-4">
-          <button class="oculi emerald" ng-click="selectOculi('emerald')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('emerald')}}" >
-          </button>
-          <p>Emerald</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="well col-xs-4">
-          <button class="oculi tourmaline" ng-click="selectOculi('tourmaline')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('tourmaline')}}" >
-          </button>
-          <p>Tourmaline</p>
-        </div>
-        <div class="well col-xs-4">
-          <button class="oculi amethyst" ng-click="selectOculi('amethyst')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('amethyst')}}" >
-          </button>
-          <p>Amethyst</p>
-        </div>
-        <div class="well col-xs-4">
-          <button class="oculi citrine" ng-click="selectOculi('citrine')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('citrine')}}" >
-          </button>
-          <p>Citrine</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="well col-xs-4">
-          <button class="oculi diamond" ng-click="selectOculi('diamond')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('diamond')}}" >
-          </button>
-          <p>Diamond</p>
-        </div>
-        <div class="well col-xs-4">
-          <button class="oculi onyx" ng-click="selectOculi('onyx')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('onyx')}}" >
-          </button>
-          <p>Onyx</p>
-        </div>
-        <div class="well col-xs-4">
-          <button class="oculi spinel" ng-click="selectOculi('spinel')" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats('spinel')}}" >
-          </button>
-          <p>Spinel</p>
+          <p>{{o}}</p>
         </div>
       </div>
     </div>

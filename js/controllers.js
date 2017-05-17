@@ -7,8 +7,8 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   };
   $scope.resultOculi = '';
   $scope.craftMsg = '';
-  // $scope.stats = Stats.getStats();
   $scope.statsService = Stats;
+  $scope.oculiArray = Object.keys($scope.statsService.getAllStats());
 
   //dynamic crafting
   $scope.$watchCollection('chosenOculi', function(newVal, oldVal){
@@ -92,8 +92,26 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     'spinel': 0
   };
 
+  $scope.results = {
+    'sapphire': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'ruby': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'emerald': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'tourmaline': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'amethyst': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'citrine': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'diamond': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'onyx': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'spinel': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0}
+  }
+
   $scope.addOculi = function(oculi){
     $scope.stash[oculi]++;
+  }
+
+  $scope.removeOculi = function(oculi){
+    if($scope.stash[oculi] > 0){
+      $scope.stash[oculi]--;
+    }
   }
 
   $scope.bulkAddOculi = function(){

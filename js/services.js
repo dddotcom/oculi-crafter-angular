@@ -208,4 +208,7 @@ angular.module('OculiCrafterServices', [])
       return "Attack: " + attack + "\r\nDefense: " + defense + "\n" + "Timeline: " + timeline;
     }
   }
-});
+})
+.factory('Facets', function(){
+  
+})
