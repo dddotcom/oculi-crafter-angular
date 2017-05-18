@@ -114,6 +114,10 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     }
   }
 
+  $scope.resetOculi = function(oculi){
+    $scope.stash[oculi] = 0;
+  }
+
   $scope.bulkAddOculi = function(){
     for(stone in $scope.stashForm){
       $scope.stash[stone] += $scope.stashForm[stone];
@@ -123,5 +127,9 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   $scope.resetStash = function(){
     Object.keys($scope.stash).forEach(v => $scope.stash[v] = 0);
     Object.keys($scope.stashForm).forEach(v => $scope.stashForm[v] = 0);
+  }
+
+  $scope.selectDropdown = function(selection){
+    console.log(selection);
   }
 }]);

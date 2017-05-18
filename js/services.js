@@ -1,6 +1,6 @@
 angular.module('OculiCrafterServices', [])
 .factory('Recipes', function(){
-  var recipes = {
+  const recipes = {
     'tourmaline': ['sapphire', 'emerald', 'blank'],
     'amethyst': ['sapphire', 'ruby', 'blank'],
     'citrine': ['ruby', 'emerald', 'blank'],
@@ -34,7 +34,7 @@ angular.module('OculiCrafterServices', [])
   }
 })
 .factory('Stats', function(){
-  var stats = {
+  const stats = {
     'sapphire': { attack: {
       rough: 'Water',
       tumbled: '+8% Dmg', //plus Water
@@ -210,5 +210,7 @@ angular.module('OculiCrafterServices', [])
   }
 })
 .factory('Facets', function(){
-  
+  return {
+    
+  }
 })

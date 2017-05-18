@@ -1,15 +1,16 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6">
-    <h3 class="text-center">Bulk Add</h3>
+    <h3 >Bulk Add</h3>
+    <br>
     <form class="form-horizontal">
-      <div class="form-group" ng-repeat="(stone, qty) in stash">
-        <label class="control-label col-sm-offset-4 col-sm-2">{{stone}}</label>
-        <div class="col-sm-2">
-          <input type="number" class="form-control" value="stashForm[stone]" ng-model="stashForm[stone]">
+      <div class="form-group text-left" ng-repeat="(stone, qty) in stash">
+        <label class="control-label col-sm-4">{{stone}}</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" ng-model="stashForm[stone]">
         </div>
       </div>
       <div class="text-center">
-        <button class="col-sm-offset-4 col-sm-4" ng-click="bulkAddOculi()">Add</button>
+        <button class="col-sm-4" ng-click="bulkAddOculi()">Add</button>
       </div>
 
     </form>
@@ -26,45 +27,57 @@
           </button>
           <button ng-click="addOculi(stone)">+</button>
           <p>{{stone}}</p>
+          <button ng-click="resetOculi(stone)">Reset</button>
         </div>
       </div>
     </div>
     <div class="text-center">
       <br>
-      <button ng-click="resetStash()">Reset Stash</button>
+      <button ng-click="resetStash()">Reset Entire Stash</button>
     </div>
   </div>
 </div>
-<div class="text-center row">
+<div class="row">
   <h3>But...what can I make?</h3>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Rough</th>
-        <th>Tumbled</th>
-        <th>Faceted</th>
-        <th>Brilliant</th>
-      </tr>
-    </thead>
-    <tbody>
+  <div>
+    <div class="btn-group" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+        Optimize for <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a ng-click="selectDropdown('stone')">Stone</a></li>
+        <li role="menuitem"><a ng-click="selectDropdown('facet')">Facet</a></li>
+      </ul>
+    </div>
+  </div>
+  <br>
+
+  <div class="col-xs-1">
+    <p>Valuable Facet <span class="glyphicon glyphicon-arrow-right"></span> </p>
+    <p><span class="glyphicon glyphicon-arrow-down"></span><br>Valuable Stone</p>
+  </div>
+  <div class="col-xs-11">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="text-center">Rough</th>
+          <th class="text-center">Tumbled</th>
+          <th class="text-center">Faceted</th>
+          <th class="text-center">Brilliant</th>
+        </tr>
+      </thead>
+      <tbody>
 
 
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-    </tbody>
-  </table>
+        <tr ng-repeat="(key,value) in results">
+          <td>{{key}}</td>
+          <td>{{value.rough}}</td>
+          <td>{{value.tumbled}}</td>
+          <td>{{value.faceted}}</td>
+          <td>{{value.brilliant}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
