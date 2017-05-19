@@ -18,7 +18,7 @@ button:focus {
   box-shadow: 0 1px 10px rgba(152,173, 185, 0.8);
   font-weight: bold;
   border: 1px solid rgb(194, 215,224);
-  background-color: rgba(152,173, 185, 0.8);
+  background-color: rgba(108,141, 167, 0.8);
 }
 
 .well p {
@@ -41,7 +41,6 @@ button:focus {
   margin: auto;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
 }
 
 .crafter {
@@ -68,43 +67,43 @@ button:focus {
   background-color: white;
 }
 .sapphire {
-  background-color: #082567;
+  fill: #082567;
 }
 
 .ruby {
-  background-color: #E0115F;
+  fill: #E0115F;
 }
 
 .emerald {
-  background-color: #3bbc46;
+  fill: #3bbc46;
 }
 
 .tourmaline {
-  background-color: #a8ecdd;
+  fill: #a8ecdd;
 }
 
 .amethyst {
-  background-color: #9966cc;
+  fill: #9966cc;
 }
 
 .citrine {
-  background-color: #E4D00A;
+  fill: #E4D00A;
 }
 
 .diamond {
-  background-color: #b9f2ff;
+  fill: #b9f2ff;
 }
 
 .onyx {
-  background-color: #0f0f0f;
+  fill: #0f0f0f;
 }
 
 .spinel {
-  background-color: #8b1237;
+  fill: #8b1237;
 }
 
 .princess-stone {
-  background-color: #e7aaba;
+  fill: #e7aaba;
 }
 
 #craft-button {

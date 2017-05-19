@@ -69,15 +69,15 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
 }])
 .controller('InventoryCtrl', ['$scope', 'Facets', function($scope, Facets){
   $scope.stash = {
-    'sapphire': 100,
-    'ruby': 100,
-    'emerald': 100,
-    'tourmaline': 100,
-    'amethyst': 100,
-    'citrine': 100,
-    'diamond': 100,
-    'onyx': 100,
-    'spinel': 100
+    'sapphire': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'ruby': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'emerald': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'tourmaline': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'amethyst': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'citrine': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'diamond': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'onyx': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'spinel': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0}
   }
 
   $scope.stashForm = {
@@ -104,18 +104,18 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     'spinel': {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0}
   }
 
-  $scope.addOculi = function(oculi){
-    $scope.stash[oculi]++;
+  $scope.addOculi = function(oculi, facet){
+    $scope.stash[oculi][facet]++;
   }
 
-  $scope.removeOculi = function(oculi){
-    if($scope.stash[oculi] > 0){
-      $scope.stash[oculi]--;
+  $scope.removeOculi = function(oculi, facet){
+    if($scope.stash[oculi][facet] > 0){
+      $scope.stash[oculi][facet]--;
     }
   }
 
-  $scope.resetOculi = function(oculi){
-    $scope.stash[oculi] = 0;
+  $scope.resetOculi = function(oculi, facet){
+    $scope.stash[oculi][facet] = 0;
   }
 
   $scope.bulkAddOculi = function(){
