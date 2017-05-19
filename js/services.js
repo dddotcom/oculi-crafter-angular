@@ -210,7 +210,37 @@ angular.module('OculiCrafterServices', [])
   }
 })
 .factory('Facets', function(){
+
+  const facetMap = {
+    rough: {
+      tumbled: 3,
+      faceted: 9,
+      brilliant: 27
+    },
+    tumbled: {
+      tumbled: undefined,
+      faceted: 3,
+      brilliant: 9
+    },
+    faceted: {
+      tumbled: undefined,
+      faceted: undefined,
+      brilliant: 3
+    }
+  };
+
   return {
-    
+    convertFromTo: function(fromFacet, toFacet, numOculi){
+      let results = {
+        rough: 0,
+        tumbled: 0,
+        faceted: 0,
+        brilliant: 0
+      }
+
+      results[toFacet] = facetMap[fromFacet][toFacet] ? Math.floor(numOculi/facetMap[fromFacet][toFacet]) : 0;
+      results.rough = numOculi%facetMap[fromFacet][toFacet];
+      return results;
+    }
   }
 })
