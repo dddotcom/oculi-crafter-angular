@@ -5,7 +5,7 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     'oculi-two': {stone: '', facetType: ''},
     'oculi-three': {stone: '', facetType: ''}
   };
-  $scope.resultOculi = '';
+  $scope.resultOculi = {stone: '', facetType: ''};
   $scope.craftMsg = '';
   $scope.statsService = Stats;
   $scope.oculiArray = Object.keys($scope.statsService.getAllStats());
@@ -47,12 +47,14 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     $scope.craftMsg = '';
     var r = Recipes.getResult(Object.values($scope.chosenOculi));
     if (r){
-      $scope.craftMsg = "You crafted " + r + "!" + "\r\n" + Stats.getStoneStats(r);
+      console.log(JSON.stringify(r));
+      //assume facet type is one of them
+      $scope.craftMsg = "You crafted " + r.facetType + " " + r.stone + "!" + "\r\n" + Stats.getStoneStats(r.stone, r.facetType);
       $scope.resultOculi = r;
       var resultElement = angular.element( document.querySelector( '#result') );
-      resultElement.removeAttr('class').addClass('oculi').addClass(r);
+      resultElement.removeAttr('class').addClass('oculi').addClass($scope.resultOculi.stone);
     } else {
-      $scope.resultOculi = null;
+      $scope.resultOculi = {stone: '', facetType: ''};
       $scope.craftMsg = "Couldn't craft anything :(";
     }
   }
@@ -63,7 +65,7 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
       'oculi-two': {stone: '', facetType: ''},
       'oculi-three': {stone: '', facetType: ''}
     };
-    $scope.resultOculi = null;
+    $scope.resultOculi = {stone: '', facetType: ''};
     $scope.craftMsg = '';
   }
 

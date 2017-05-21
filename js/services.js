@@ -1,5 +1,5 @@
 angular.module('OculiCrafterServices', [])
-.factory('Recipes', function(){
+.factory('Recipes', ["Facets",function(Facets){
   const recipes = {
     'tourmaline': ['sapphire', 'emerald', 'blank'],
     'amethyst': ['sapphire', 'ruby', 'blank'],
@@ -12,12 +12,24 @@ angular.module('OculiCrafterServices', [])
 
   return {
     getResult: function(chosenOculiValues){
+      let facetsMatch = true;
       let temp = chosenOculiValues.map(function(oculi){
         if(oculi.stone === ''){
           return Object.assign({}, oculi, {stone : "blank"});
         }
         return oculi;
       });
+      let f = temp[0].facetType;
+
+      //all facets should be the same, otherwise return ''
+      // if( temp[0].facetType !== '' && !(temp[0].facetType === temp[1].facetType && temp[0].facetType === temp[2].facetType) ){
+      //   return null;
+      // }
+
+      // if they are all the same, go up a level
+      if( temp[0].stone !== 'blank' && (temp[0].stone === temp[1].stone && temp[0].stone === temp[2].stone) ){
+        return Facets.getNextFacet(f) ? {stone: temp[0].stone, facetType: Facets.getNextFacet(f)} : null;
+      }
 
       for(var key in recipes){
         let arr = recipes[key].slice();
@@ -28,15 +40,16 @@ angular.module('OculiCrafterServices', [])
             index = arr.indexOf(temp[1].stone);
             arr.splice(index, 1);
             if(arr.includes(temp[2].stone)){
-              return key;
+              // return key;
+              return {stone: key, facetType: f};
             }
           }
         }
       }
-      return '';
+      return null;
     }
   }
-})
+}])
 .factory('Stats', function(){
   const stats = {
     'sapphire': { attack: {
@@ -205,10 +218,10 @@ angular.module('OculiCrafterServices', [])
     getAllStats: function(){
       return stats;
     },
-    getStoneStats: function(stone){
-      var attack = stats[stone].attack.rough;
-      var defense = stats[stone].defense.rough;
-      var timeline = stats[stone].timeline.rough;
+    getStoneStats: function(stone, facetType){
+      var attack = stats[stone].attack[facetType];
+      var defense = stats[stone].defense[facetType];
+      var timeline = stats[stone].timeline[facetType];
       return "Attack: " + attack + "\r\nDefense: " + defense + "\n" + "Timeline: " + timeline;
     }
   }
@@ -248,6 +261,14 @@ angular.module('OculiCrafterServices', [])
       results[toFacet] = facetMap[fromFacet][toFacet] ? Math.floor(numOculi/facetMap[fromFacet][toFacet]) : 0;
       results.rough = numOculi%facetMap[fromFacet][toFacet];
       return results;
+    },
+    getNextFacet: function(currentFacet){
+      let order = this.getFacetTypes();
+      let currentIndex = order.indexOf(currentFacet);
+      if(currentIndex === order.length-1){
+        return '';
+      }
+      return order[currentIndex + 1];
     }
   }
 })
