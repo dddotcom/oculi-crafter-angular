@@ -1,50 +1,51 @@
 angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
-.controller('CraftCtrl', ['$scope', '$compile', 'Recipes', 'Stats', function($scope, $compile, Recipes, Stats){
+.controller('CraftCtrl', ['$scope', '$compile', 'Recipes', 'Stats', 'Facets', function($scope, $compile, Recipes, Stats, Facets){
   $scope.chosenOculi = {
-    'oculi-one': '',
-    'oculi-two': '',
-    'oculi-three': '',
+    'oculi-one': {stone: '', facetType: ''},
+    'oculi-two': {stone: '', facetType: ''},
+    'oculi-three': {stone: '', facetType: ''}
   };
   $scope.resultOculi = '';
   $scope.craftMsg = '';
   $scope.statsService = Stats;
   $scope.oculiArray = Object.keys($scope.statsService.getAllStats());
+  $scope.facetTypes = Facets.getFacetTypes();
 
   //dynamic crafting
-  $scope.$watchCollection('chosenOculi', function(newVal, oldVal){
+  $scope.$watch(function(){return JSON.stringify($scope.chosenOculi)}, function(newVal, oldVal){
     if(newVal !== oldVal){
-      console.log("crafting");
       $scope.craft();
     }
   });
 
   $scope.removeOculi = function(key){
-    $scope.chosenOculi[key] = '';
-    $scope.craft();
+    $scope.chosenOculi[key].stone = '';
+    $scope.chosenOculi[key].facetType = '';
   }
 
-  $scope.selectOculi = function(stoneClass){
+  $scope.selectOculi = function(stoneClass, facetType){
     //choose the next oculi
-    var parent = $scope.findOpenSlot(stoneClass);
+    var parent = $scope.findOpenSlot(stoneClass, facetType);
     parent.removeAttr('class').addClass('oculi').addClass(stoneClass);
   }
 
-  $scope.findOpenSlot = function(stoneClass){
+  $scope.findOpenSlot = function(stoneClass, facetType){
     for(var key in $scope.chosenOculi){
-      if(!$scope.chosenOculi[key]){
-        $scope.chosenOculi[key] = stoneClass;
+      if(!$scope.chosenOculi[key].stone){
+        $scope.chosenOculi[key].stone = stoneClass;
+        $scope.chosenOculi[key].facetType = facetType;
         return angular.element( document.querySelector( '#' + key ) );
       }
     }
     //else if all are full, just change the first one
-    $scope.chosenOculi['oculi-one'] = stoneClass;
+    $scope.chosenOculi['oculi-one'].stone = stoneClass;
+    $scope.chosenOculi['oculi-one'].facetType = facetType;
     return angular.element( document.querySelector( '#oculi-one' ) );
   }
 
   $scope.craft = function(){
     $scope.craftMsg = '';
     var r = Recipes.getResult(Object.values($scope.chosenOculi));
-    console.log("crafted:", r);
     if (r){
       $scope.craftMsg = "You crafted " + r + "!" + "\r\n" + Stats.getStoneStats(r);
       $scope.resultOculi = r;
@@ -58,9 +59,9 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
 
   $scope.reset = function(){
     $scope.chosenOculi = {
-      'oculi-one': '',
-      'oculi-two': '',
-      'oculi-three': '',
+      'oculi-one': {stone: '', facetType: ''},
+      'oculi-two': {stone: '', facetType: ''},
+      'oculi-three': {stone: '', facetType: ''}
     };
     $scope.resultOculi = null;
     $scope.craftMsg = '';

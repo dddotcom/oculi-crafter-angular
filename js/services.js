@@ -12,18 +12,22 @@ angular.module('OculiCrafterServices', [])
 
   return {
     getResult: function(chosenOculiValues){
+      let temp = chosenOculiValues.map(function(oculi){
+        if(oculi.stone === ''){
+          return Object.assign({}, oculi, {stone : "blank"});
+        }
+        return oculi;
+      });
+
       for(var key in recipes){
-        let temp = chosenOculiValues.map(function(oculi){
-          return oculi === '' ? 'blank' : oculi;
-        });
         let arr = recipes[key].slice();
-        if(arr.includes(temp[0])){
-          var index = arr.indexOf(temp[0]);
+        if(arr.includes(temp[0].stone)){
+          var index = arr.indexOf(temp[0].stone);
           arr.splice(index, 1);
-          if(arr.includes(temp[1])){
-            index = arr.indexOf(temp[1]);
+          if(arr.includes(temp[1].stone)){
+            index = arr.indexOf(temp[1].stone);
             arr.splice(index, 1);
-            if(arr.includes(temp[2])){
+            if(arr.includes(temp[2].stone)){
               return key;
             }
           }
@@ -230,6 +234,9 @@ angular.module('OculiCrafterServices', [])
   };
 
   return {
+    getFacetTypes: function(){
+      return ['rough', 'tumbled', 'faceted', 'brilliant'];
+    },
     convertFromTo: function(fromFacet, toFacet, numOculi){
       let results = {
         rough: 0,

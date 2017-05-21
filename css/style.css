@@ -13,7 +13,8 @@ button:focus {
 
 .well {
   margin: 10px;
-  width: 29%;
+  /*width: 29%;*/
+  width: 22%;
   text-align: center;
   box-shadow: 0 1px 10px rgba(152,173, 185, 0.8);
   font-weight: bold;
@@ -39,8 +40,8 @@ button:focus {
 
 .oculi {
   margin: auto;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
 }
 
 .crafter {
@@ -49,8 +50,9 @@ button:focus {
 
 .oculi-well {
   border: 3px solid rgb(194, 215,224);
-  min-height: 157px;
-  padding: 19px;
+  /*min-height: 157px;*/
+  min-height: 125px;
+  /*padding: 19px;*/
   background-color: rgba(152,173, 185, 0.8);
   border-radius: 50%;
   text-align: center;
@@ -59,7 +61,12 @@ button:focus {
 
 .oculi-well .oculi {
   position: relative;
-  top: 33px;
+  top: 20px;
+}
+
+.oculi-well p {
+  position:relative;
+  top: 14px;
 }
 
 .progress {
@@ -67,43 +74,43 @@ button:focus {
   background-color: white;
 }
 .sapphire {
-  fill: #082567;
+  fill: rgba(8, 37, 103,0.8);
 }
 
 .ruby {
-  fill: #E0115F;
+  fill: rgba(224,17,95,0.7);
 }
 
 .emerald {
-  fill: #3bbc46;
+  fill: rgba(40, 162, 81, 0.8);
 }
 
 .tourmaline {
-  fill: #a8ecdd;
+  fill: rgba(0,158,169, 0.8);
 }
 
 .amethyst {
-  fill: #9966cc;
+  fill: rgba(153, 102, 204, 0.8);
 }
 
 .citrine {
-  fill: #E4D00A;
+  fill: rgba(228, 208, 10, 0.8);
 }
 
 .diamond {
-  fill: #b9f2ff;
+  fill: rgba(185,242,255, 0.7);
 }
 
 .onyx {
-  fill: #0f0f0f;
+  fill: rgba(15, 15, 15, 0.8);
 }
 
 .spinel {
-  fill: #8b1237;
+  fill: rgba(133,22,41, 0.8);
 }
 
 .princess-stone {
-  fill: #e7aaba;
+  fill: rgba(231,170,186, 0.8);
 }
 
 #craft-button {
