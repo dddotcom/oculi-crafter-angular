@@ -21,12 +21,18 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   $scope.removeOculi = function(key){
     $scope.chosenOculi[key].stone = '';
     $scope.chosenOculi[key].facetType = '';
+    //remove svg element
+    var parent = angular.element( document.querySelector( '#oculi-one' ) );
+    parent.children().remove();
   }
 
   $scope.selectOculi = function(stoneClass, facetType){
     //choose the next oculi
     var parent = $scope.findOpenSlot(stoneClass, facetType);
-    parent.removeAttr('class').addClass('oculi').addClass(stoneClass);
+    var svgElem = angular.element('<svg-icon facet="'+facetType+'" stone="'+ stoneClass+'"></svg-icon>');
+    parent.append(svgElem);
+    $compile(svgElem)($scope);
+    // parent.removeAttr('class').addClass('oculi').addClass(stoneClass);
   }
 
   $scope.findOpenSlot = function(stoneClass, facetType){
@@ -45,17 +51,23 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
 
   $scope.craft = function(){
     $scope.craftMsg = '';
+    var resultElement = angular.element( document.querySelector( '#result') );
+    console.log(resultElement);
     var r = Recipes.getResult(Object.values($scope.chosenOculi));
     if (r){
-      console.log(JSON.stringify(r));
+      // console.log(JSON.stringify(r));
       //assume facet type is one of them
       $scope.craftMsg = "You crafted " + r.facetType + " " + r.stone + "!" + "\r\n" + Stats.getStoneStats(r.stone, r.facetType);
       $scope.resultOculi = r;
-      var resultElement = angular.element( document.querySelector( '#result') );
-      resultElement.removeAttr('class').addClass('oculi').addClass($scope.resultOculi.stone);
+      resultElement.children().remove();
+      var svgElem = angular.element('<svg-icon facet="'+r.facetType+'" stone="'+ r.stone+'"></svg-icon>');
+      resultElement.append(svgElem);
+      $compile(svgElem)($scope);
+      // resultElement.removeAttr('class').addClass('oculi').addClass($scope.resultOculi.stone);
     } else {
       $scope.resultOculi = {stone: '', facetType: ''};
       $scope.craftMsg = "Couldn't craft anything :(";
+      resultElement.children().remove();
     }
   }
 
@@ -67,6 +79,10 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     };
     $scope.resultOculi = {stone: '', facetType: ''};
     $scope.craftMsg = '';
+    for(let key in $scope.chosenOculi){
+      let parent = angular.element( document.querySelector( '#' + key ) );
+      parent.children().remove();
+    }
   }
 
 }])

@@ -269,7 +269,7 @@ angular.module('OculiCrafterServices', [])
     }
   }
 })
-.directive('svgIcon', function() {
+.directive('svgIcon', ["$compile", function($compile) {
     function link(scope, element, attrs) {
       function path(facet, stone) {
         if(facet === "rough"){
@@ -284,8 +284,7 @@ angular.module('OculiCrafterServices', [])
       }
 
       function renderSVG() {
-          console.log(attrs.facet, attrs.stone);
-          element.html( path(attrs.facet, attrs.stone) );
+        element.html( path(attrs.facet, attrs.stone) );
       }
 
       renderSVG();
@@ -295,4 +294,4 @@ angular.module('OculiCrafterServices', [])
       link: link,
       restrict: 'E'
     };
-});
+}]);
