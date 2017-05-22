@@ -183,20 +183,20 @@ angular.module('OculiCrafterServices', [])
       faceted: 'Begin turn 20% forward on timeline',
       brilliant: 'Begin turn 30% forward on timeline'
     } },
-    'princess-stone': { attack: { //i think princess stone can only be brilliant
-      rough: '+40% Physical Damage',
-      tumbled: '+40% Physical Damage',
-      faceted: '+40% Physical Damage',
+    'princess-stone': { attack: {
+      rough: 'N/A',
+      tumbled: 'N/A',
+      faceted: 'N/A',
       brilliant: '+40% Physical Damage'
     }, defense: {
-      rough: 'Physical and Magical Resistance + 25%',
-      tumbled: 'Physical and Magical Resistance + 25%',
-      faceted:'Physical and Magical Resistance + 25%',
+      rough: 'N/A',
+      tumbled: 'N/A',
+      faceted: 'N/A',
       brilliant:'Physical and Magical Resistance + 25%'
     }, timeline: {
-      rough: '+35% Magic Damage',
-      tumbled: '+35% Magic Damage',
-      faceted: '+35% Magic Damage',
+      rough: 'N/A',
+      tumbled: 'N/A',
+      faceted: 'N/A',
       brilliant: '+35% Magic Damage'
     } }
   }
