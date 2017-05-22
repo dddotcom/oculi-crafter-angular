@@ -37,8 +37,8 @@ angular.module('OculiCrafterServices', [])
             index = arr.indexOf(temp[1].stone);
             arr.splice(index, 1);
             if(arr.includes(temp[2].stone) && (temp[2].facetType === "" || temp[2].facetType === tempFacet)){
-              // return key;
-              return {stone: key, facetType: f};
+              //princess stone logic
+              return (key === "princess-stone" && f !== "brilliant") ? null : {stone: key, facetType: f};
             }
           }
         }
