@@ -21,11 +21,6 @@ angular.module('OculiCrafterServices', [])
       });
       let f = temp[0].facetType;
 
-      //all facets should be the same, otherwise return ''
-      // if( temp[0].facetType !== '' && !(temp[0].facetType === temp[1].facetType && temp[0].facetType === temp[2].facetType) ){
-      //   return null;
-      // }
-
       // if they are all the same, go up a level
       if( temp[0].stone !== 'blank' && (temp[0].stone === temp[1].stone && temp[0].stone === temp[2].stone) ){
         return Facets.getNextFacet(f) ? {stone: temp[0].stone, facetType: Facets.getNextFacet(f)} : null;
@@ -33,13 +28,15 @@ angular.module('OculiCrafterServices', [])
 
       for(var key in recipes){
         let arr = recipes[key].slice();
+
         if(arr.includes(temp[0].stone)){
+          let tempFacet = temp[0].facetType;
           var index = arr.indexOf(temp[0].stone);
           arr.splice(index, 1);
-          if(arr.includes(temp[1].stone)){
+          if(arr.includes(temp[1].stone) && (temp[1].facetType === "" || temp[1].facetType === tempFacet) ){
             index = arr.indexOf(temp[1].stone);
             arr.splice(index, 1);
-            if(arr.includes(temp[2].stone)){
+            if(arr.includes(temp[2].stone) && (temp[2].facetType === "" || temp[2].facetType === tempFacet)){
               // return key;
               return {stone: key, facetType: f};
             }
