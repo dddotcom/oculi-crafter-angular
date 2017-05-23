@@ -13,13 +13,17 @@ button:focus {
 
 .well {
   margin: 10px;
-  /*width: 29%;*/
-  width: 22%;
+  width: 30%;
+  min-height: 295px;
   text-align: center;
   box-shadow: 0 1px 10px rgba(152,173, 185, 0.8);
-  font-weight: bold;
   border: 1px solid rgb(194, 215,224);
   background-color: rgba(108,141, 167, 0.8);
+}
+
+.well:hover {
+  background-color: rgba(78,111, 137, 0.8);
+  border: 1px solid rgb(184, 205,214);
 }
 
 .well p {

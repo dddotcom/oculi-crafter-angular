@@ -1,5 +1,5 @@
 angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
-.controller('CraftCtrl', ['$scope', '$compile', 'Recipes', 'Stats', 'Facets', function($scope, $compile, Recipes, Stats, Facets){
+.controller('CraftCtrl', ['$scope', '$compile', 'Recipes', 'Stats', 'Facets', '$sce', function($scope, $compile, Recipes, Stats, Facets, $sce){
   $scope.chosenOculi = {
     'oculi-one': {stone: '', facetType: ''},
     'oculi-two': {stone: '', facetType: ''},
@@ -51,7 +51,7 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     var resultElement = angular.element( document.querySelector( '#result') );
     var r = Recipes.getResult(Object.values($scope.chosenOculi));
     if (r){
-      $scope.craftMsg = "You crafted " + r.facetType + " " + r.stone + "!" + "\r\n" + Stats.getStoneStats(r.stone, r.facetType);
+      $scope.craftMsg = $sce.trustAsHtml("<h4>You crafted " + r.facetType + " " + r.stone + "!" + "</h4><br>" + Stats.getStoneStats(r.stone, r.facetType));
       $scope.resultOculi = r;
       $scope.addSvgElement(r.facetType, r.stone, resultElement);
     } else {
@@ -157,4 +157,4 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
       }
     }
   }
-}]);
+}])

@@ -27,15 +27,13 @@
         <div class="col-xs-offset-4 col-xs-4">
           <div id="result-well" class="oculi-well">
             <div id="result">
-            </div> 
-            <!-- <svg id="result" ng-show="resultOculi['stone']" version="1.1" class="oculi" viewBox="0.0 0.0 462.9448818897638 533.6036745406824" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><clipPath id="p.0"><path d="m0 0l462.9449 0l0 533.6037l-462.9449 0l0 -533.6037z" clip-rule="nonzero"></path></clipPath><g clip-path="url(#p.0)"><path fill="#000000" fill-opacity="0.0" d="m0 0l462.9449 0l0 533.6037l-462.9449 0z" fill-rule="evenodd"></path><path fill="#000000" fill-opacity="0.0" d="m358.1706 0l-325.2782 103.5538l-31.67454 277.76642l120.608925 151.06558l272.89236 -79.18634l67.00525 -214.41731z" fill-rule="evenodd"></path><path stroke="#efefef" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt" d="m358.1706 0l-325.2782 103.5538l-31.67454 277.76642l120.608925 151.06558l272.89236 -79.18634l67.00525 -214.41731z" fill-rule="evenodd"></path><path fill="#cfe2f3" d="m356.95276 1.2204725l-143.7559 300.9134" fill-rule="evenodd"></path><path stroke="#efefef" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt" d="m356.95276 1.2204725l-143.7559 300.9134" fill-rule="evenodd"></path><path fill="#000000" fill-opacity="0.0" d="m0 380.10236l214.4147 -79.188965l-90.15224 229.03674" fill-rule="evenodd"></path><path stroke="#efefef" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt" d="m0 380.10236l214.4147 -79.188965l-90.15224 229.03674" fill-rule="evenodd"></path><path fill="#000000" fill-opacity="0.0" d="m147.40945 196.14174l-49.94751 59.695526" fill-rule="evenodd"></path><path stroke="#efefef" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt" d="m147.40945 196.14174l-49.94751 59.695526" fill-rule="evenodd"></path><path fill="#000000" fill-opacity="0.0" d="m345.9895 155.93964l34.11023 75.53281" fill-rule="evenodd"></path><path stroke="#efefef" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt" d="m345.9895 155.93964l34.11023 75.53281" fill-rule="evenodd"></path><path fill="#000000" fill-opacity="0.0" d="m314.31235 422.74277l-63.34909 23.147003" fill-rule="evenodd"></path><path stroke="#efefef" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt" d="m314.31235 422.74277l-63.34909 23.147003" fill-rule="evenodd"></path></g></svg> -->
-            <!-- <p>{{resultOculi["facetType"]}}</p> -->
+            </div>
           </div>
         </div>
       </div>
     </div>
     <br>
-    <h4 class="text-center craft-msg" ng-show="craftMsg">{{craftMsg}}</h4>
+    <div ng-bind-html="craftMsg" class="text-center craft-msg" ng-show="craftMsg"></div>
   </div>
   <div class="col-xs-12 col-sm-8">
     <h3 class="text-center">Oculi Library</h3>
@@ -44,11 +42,14 @@
         <div class="all-oculi">
           <div class="row">
             <div ng-repeat="o in oculiArray">
-              <div class="well col-xs-4">
-                <div ng-click="selectOculi(o, f)" tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats(o,f)}}">
-                  <svg-icon facet="{{f}}" stone="{{o}}"></svg-icon>
+              <div class="well col-xs-4" ng-click="selectOculi(o, f)">
+                <!-- <div tooltip-placement="top" uib-tooltip="{{statsService.getStoneStats(o,f)}}"> -->
+                <div class="text-center">
+                  <svg-icon  facet="{{f}}" stone="{{o}}"></svg-icon>
+                  <p >{{o.toUpperCase()}}</p>
+                  <div class="text-left" ng-bind-html="statsService.getStoneStats(o,f)"></div>
                 </div>
-                <p>{{o.toUpperCase()}}</p>
+
               </div>
             </div>
           </div>
