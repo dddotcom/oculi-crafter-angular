@@ -22,17 +22,14 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     $scope.chosenOculi[key].stone = '';
     $scope.chosenOculi[key].facetType = '';
     //remove svg element
-    var parent = angular.element( document.querySelector( '#oculi-one' ) );
+    var parent = angular.element( document.querySelector( '#' + key ) );
     parent.children().remove();
   }
 
   $scope.selectOculi = function(stoneClass, facetType){
     //choose the next oculi
     var parent = $scope.findOpenSlot(stoneClass, facetType);
-    var svgElem = angular.element('<svg-icon facet="'+facetType+'" stone="'+ stoneClass+'"></svg-icon>');
-    parent.append(svgElem);
-    $compile(svgElem)($scope);
-    // parent.removeAttr('class').addClass('oculi').addClass(stoneClass);
+    $scope.addSvgElement(facetType, stoneClass, parent);
   }
 
   $scope.findOpenSlot = function(stoneClass, facetType){
@@ -52,23 +49,23 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   $scope.craft = function(){
     $scope.craftMsg = '';
     var resultElement = angular.element( document.querySelector( '#result') );
-    console.log(resultElement);
     var r = Recipes.getResult(Object.values($scope.chosenOculi));
     if (r){
-      // console.log(JSON.stringify(r));
-      //assume facet type is one of them
       $scope.craftMsg = "You crafted " + r.facetType + " " + r.stone + "!" + "\r\n" + Stats.getStoneStats(r.stone, r.facetType);
       $scope.resultOculi = r;
-      resultElement.children().remove();
-      var svgElem = angular.element('<svg-icon facet="'+r.facetType+'" stone="'+ r.stone+'"></svg-icon>');
-      resultElement.append(svgElem);
-      $compile(svgElem)($scope);
-      // resultElement.removeAttr('class').addClass('oculi').addClass($scope.resultOculi.stone);
+      $scope.addSvgElement(r.facetType, r.stone, resultElement);
     } else {
       $scope.resultOculi = {stone: '', facetType: ''};
       $scope.craftMsg = "Couldn't craft anything :(";
       resultElement.children().remove();
     }
+  }
+
+  $scope.addSvgElement = function(facetType, stone, parentElement){
+    parentElement.children().remove();
+    var svgElem = angular.element('<svg-icon facet="'+facetType+'" stone="'+ stone+'"></svg-icon>');
+    parentElement.append(svgElem);
+    $compile(svgElem)($scope);
   }
 
   $scope.reset = function(){
