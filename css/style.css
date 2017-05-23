@@ -61,12 +61,7 @@ button:focus {
 
 .oculi-well .oculi {
   position: relative;
-  top: 20px;
-}
-
-.oculi-well p {
-  position:relative;
-  top: 14px;
+  top: 30px;
 }
 
 .progress {
