@@ -49,13 +49,14 @@ button:focus {
 }
 
 .crafter {
-  padding: 10px;
+  margin: 40px 0px 10px 41px;
+  position: fixed;
 }
 
 .oculi-well {
   border: 3px solid rgb(194, 215,224);
-  /*min-height: 157px;*/
   min-height: 125px;
+  min-width: 125px;
   /*padding: 19px;*/
   background-color: rgba(152,173, 185, 0.8);
   border-radius: 50%;
@@ -113,7 +114,8 @@ button:focus {
 }
 
 #craft-button {
-  margin-top: 79px;
+  margin-top: 53px;
+  margin-left:20px;
 }
 
 #result-well {
