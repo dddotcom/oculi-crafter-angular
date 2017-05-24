@@ -141,7 +141,7 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   }
 
   $scope.resetStash = function(){
-    Object.keys($scope.stash).forEach(v => $scope.stash[v] = 0);
+    Object.keys($scope.stash).forEach(v => $scope.stash[v] = {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0});
     Object.keys($scope.stashForm).forEach(v => $scope.stashForm[v] = 0);
   }
 

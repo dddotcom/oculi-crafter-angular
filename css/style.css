@@ -7,6 +7,10 @@ button:focus {
     outline: none;
 }
 
+#inventory.row{
+  margin: 0px;
+}
+
 .form-horizontal .control-label {
   text-align: left;
 }
@@ -30,12 +34,24 @@ button:focus {
   padding-top: 10px
 }
 
-.well .badge {
+.inventory-well {
+  margin: 12px 5px;
+  text-align: center;
+  box-shadow: 0 1px 10px rgba(152,173, 185, 0.8);
+  border: 1px solid rgb(194, 215,224);
+  background-color: rgba(108,141, 167, 0.8);
+}
+
+.inventory-well .span {
+  margin: auto;
+}
+
+.inventory-well .badge {
   position: absolute;
   min-width: 30px;
   min-height: 30px;
-  top: -10px;
-  right: -11px;
+  top: 0px;
+  right: 5px;
   padding: 7px;
   border-radius: 50%;
   border: 2px solid rgb(194, 215,224);
