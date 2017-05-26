@@ -85,7 +85,7 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
 }])
 .controller('InventoryCtrl', ['$scope', 'Facets', function($scope, Facets){
   $scope.stash = {
-    'sapphire': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'sapphire': {'rough': 10, 'tumbled': 7, 'faceted': 10, 'brilliant': 10},
     'ruby': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
     'emerald': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
     'tourmaline': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
@@ -148,9 +148,13 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
   $scope.selectDropdown = function(type, option){
     if(type === 'facet'){
       //hardcode rough to others
+      // let r = Facets.convertFromTo('rough', option, $scope.stash["sapphire"]);
+      // for(key in r){
+      //   $scope.results["sapphire"][key] = r[key];
+      // }
       for(oculiKey in $scope.results){
-        let numOculi = $scope.stash[oculiKey];
-        let r = Facets.convertFromTo('rough', option, numOculi);
+        // let numOculi = $scope.stash[oculiKey]["rough"];
+        let r = Facets.convertFromTo('rough', option, $scope.stash[oculiKey]);
         for(key in r){
           $scope.results[oculiKey][key] = r[key];
         }
