@@ -40,7 +40,7 @@
     </div>
     <div class="text-center">
       <br>
-      <button ng-click="resetStash()">Reset Entire Stash</button>
+      <button ng-click="resetStash(stash)">Reset Entire Stash</button>
     </div>
   </div>
 </div>
@@ -48,7 +48,7 @@
 
 <div class="container">
   <h3>But...what can I make?</h3>
-  <button class="btn btn-primary">update stash</button>
+  <button class="btn btn-primary" ng-click="updateStashWithResults()">update stash</button>
   <br><br>
   <div>
     <div class="btn-group" uib-dropdown is-open="status.isopen">
