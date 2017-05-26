@@ -84,8 +84,11 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
 
 }])
 .controller('InventoryCtrl', ['$scope', 'Facets', function($scope, Facets){
+
+  $scope.isOptimized = false;
+
   $scope.stash = {
-    'sapphire': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
+    'sapphire': {'rough': 10, 'tumbled': 7, 'faceted': 10, 'brilliant': 10},
     'ruby': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
     'emerald': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
     'tourmaline': {'rough': 100, 'tumbled': 0, 'faceted': 0, 'brilliant': 0},
@@ -140,20 +143,33 @@ angular.module("OculiCrafterControllers", ['OculiCrafterServices'])
     }
   }
 
-  $scope.resetStash = function(){
-    Object.keys($scope.stash).forEach(v => $scope.stash[v] = {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0});
-    Object.keys($scope.stashForm).forEach(v => $scope.stashForm[v] = 0);
+  $scope.updateStashWithResults = function(){
+    //don't let user reset from here if they haven't crafted anything new
+    if($scope.isOptimized){
+      for(let stone in $scope.results){
+        for(let facet in $scope.results[stone]){
+            $scope.stash[stone][facet] = $scope.results[stone][facet];
+        }
+      }
+      $scope.resetStash($scope.results);
+      $scope.isOptimized = false;
+    }
+  }
+
+  $scope.resetStash = function(stash){
+    Object.keys(stash).forEach(v => stash[v] = {'rough': 0, 'tumbled': 0, 'faceted': 0, 'brilliant': 0});
+    // Object.keys($scope.stashForm).forEach(v => $scope.stashForm[v] = 0);
   }
 
   $scope.selectDropdown = function(type, option){
     if(type === 'facet'){
       //hardcode rough to others
       for(oculiKey in $scope.results){
-        let numOculi = $scope.stash[oculiKey];
-        let r = Facets.convertFromTo('rough', option, numOculi);
+        let r = Facets.convertFromTo('rough', option, $scope.stash[oculiKey]);
         for(key in r){
           $scope.results[oculiKey][key] = r[key];
         }
+        $scope.isOptimized = true;
       }
     }
   }

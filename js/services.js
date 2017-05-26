@@ -255,7 +255,7 @@ angular.module('OculiCrafterServices', [])
     getFacetTypes: function(){
       return ['rough', 'tumbled', 'faceted', 'brilliant'];
     },
-    convertFromTo: function(fromFacet, toFacet, numOculi){
+    convertFromTo: function(fromFacet, toFacet, oculiStash){
       let results = {
         rough: 0,
         tumbled: 0,
@@ -263,8 +263,29 @@ angular.module('OculiCrafterServices', [])
         brilliant: 0
       }
 
-      results[toFacet] = facetMap[fromFacet][toFacet] ? Math.floor(numOculi/facetMap[fromFacet][toFacet]) : 0;
-      results.rough = numOculi%facetMap[fromFacet][toFacet];
+      let currentFacet = fromFacet;
+      let nextFacet = this.getNextFacet(currentFacet);
+      let remainder = oculiStash[currentFacet];
+      while(currentFacet !== toFacet){
+          let result = facetMap[currentFacet][nextFacet] ? Math.floor(remainder/facetMap[currentFacet][nextFacet]) : 0;
+          // console.log("converting", remainder, currentFacet, "to", result, nextFacet);
+          results[nextFacet] = oculiStash[nextFacet] + result;
+          remainder = remainder%facetMap[currentFacet][nextFacet];
+          results[currentFacet] = remainder;
+
+          currentFacet = nextFacet;
+          nextFacet = this.getNextFacet(currentFacet);
+          remainder = results[currentFacet];
+      }
+      results[currentFacet] = remainder;
+
+      //fill in the rest of the table
+      currentFacet = this.getNextFacet(currentFacet);
+      while(currentFacet !== ''){
+        results[currentFacet] = oculiStash[currentFacet];
+        currentFacet = this.getNextFacet(currentFacet);
+      }
+
       return results;
     },
     getNextFacet: function(currentFacet){
@@ -274,6 +295,14 @@ angular.module('OculiCrafterServices', [])
         return '';
       }
       return order[currentIndex + 1];
+    },
+    getPreviousFacet: function(currentFacet){
+      let order = this.getFacetTypes();
+      let currentIndex = order.indexOf(currentFacet);
+      if(currentIndex === 0){
+        return '';
+      }
+      return order[currentIndex-1];
     }
   }
 });
