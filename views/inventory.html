@@ -18,7 +18,7 @@
   </div> -->
   <!-- <div class="col-xs-12 col-sm-6"> -->
   <div class="col-xs-12">
-    <h3 class="text-center">Oculi Stash!?!??!</h3>
+    <h3 class="text-center">Oculi Stash</h3>
     <div class="all-oculi">
       <div class="row">
         <div ng-repeat="(stone, facets) in stash">
@@ -82,9 +82,13 @@
       </thead>
       <tbody>
 
-
         <tr ng-repeat="(key,value) in results">
-          <td>{{key}} ({{stash[key]}})</td>
+          <td>{{key | capitalize}}
+            <span ng-repeat="(k,v) in stash[key]" ng-show="v > 0">
+              <svg-icon facet="{{k}}" stone="{{key}}"></svg-icon>
+              {{v}}
+            </span>
+          </td>
           <td>{{value.rough}}</td>
           <td>{{value.tumbled}}</td>
           <td>{{value.faceted}}</td>

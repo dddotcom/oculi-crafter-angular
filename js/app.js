@@ -38,4 +38,9 @@ var app = angular.module('OculiCrafterAngular', ['ui.router', 'ui.bootstrap', 'O
       link: link,
       restrict: 'E'
     };
-}]);
+}])
+.filter('capitalize', function(){
+  return function(input){
+    return input[0].toUpperCase() + input.substring(1, input.length);
+  }
+})

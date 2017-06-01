@@ -129,6 +129,10 @@ button:focus {
   fill: rgba(231,170,186, 0.8);
 }
 
+.oculi-sm {
+  width: 50%;
+}
+
 #craft-button {
   margin-top: 53px;
   margin-left:20px;
