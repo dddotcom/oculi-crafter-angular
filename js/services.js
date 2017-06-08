@@ -19,6 +19,27 @@ angular.module('OculiCrafterServices', [])
     return '';
   }
 
+  function numStonesSubmitted(stones){
+    let count = 0;
+    stones.forEach( (s) => {
+      if(s !== 'blank' && s !== '' ){
+        count++;
+      }
+    });
+    return count;
+  }
+
+  function canGoUpALevel(stones, facets){
+    // all the same oculi? are there 3 oculi
+    let s = new Set(stones);
+    let c = numStonesSubmitted(stones);
+    if(s.size === 1 && c === 3){
+      //all the same facet?
+      let f = new Set(facets);
+      return f.size === 1;
+    }
+  }
+
   return {
     getResult: function(chosenOculiValues){
       let f = getFacetValue(chosenOculiValues);
@@ -29,8 +50,10 @@ angular.module('OculiCrafterServices', [])
         return oculi;
       });
 
-      // if they are all the same, go up a level
-      if( temp[0].stone !== 'blank' && (temp[0].stone === temp[1].stone && temp[0].stone === temp[2].stone) ){
+      let stones = temp.map((t) => t.stone);
+      let facets = temp.map((t) => t.facetType);
+      // // if they are all the same, go up a level
+      if(canGoUpALevel(stones, facets)){
         return Facets.getNextFacet(f) ? {stone: temp[0].stone, facetType: Facets.getNextFacet(f)} : null;
       }
 
